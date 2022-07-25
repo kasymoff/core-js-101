@@ -137,8 +137,30 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const rect1TopLeft = {
+    x: rect1.left,
+    y: rect1.top,
+  };
+  const rect1BottomRight = {
+    x: rect1.left + rect1.width,
+    y: rect1.top + rect1.height,
+  };
+  const rect2TopLeft = {
+    x: rect2.left,
+    y: rect2.top,
+  };
+  const rect2BottomRight = {
+    x: rect2.left + rect2.width,
+    y: rect2.top + rect2.height,
+  };
+  if (rect1TopLeft.x > rect2BottomRight.x
+    || rect1TopLeft.y > rect2BottomRight.y
+    || rect1BottomRight.x < rect2TopLeft.x
+    || rect1BottomRight.y < rect2TopLeft.y) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -491,8 +513,40 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0] === position[0][1] && position[0][1] === position[0][2]
+    && position[0][0] !== undefined) {
+    return position[0][0];
+  }
+  if (position[1][0] === position[1][1] && position[1][1] === position[1][2]
+    && position[1][0] !== undefined) {
+    return position[1][0];
+  }
+  if (position[2][0] === position[2][1] && position[2][1] === position[2][2]
+    && position[2][0] !== undefined) {
+    return position[2][0];
+  }
+  if (position[0][0] === position[1][0] && position[1][0] === position[2][0]
+    && position[0][0] !== undefined) {
+    return position[0][0];
+  }
+  if (position[0][1] === position[1][1] && position[1][1] === position[2][1]
+    && position[0][1] !== undefined) {
+    return position[0][1];
+  }
+  if (position[0][2] === position[1][2] && position[1][2] === position[2][2]
+    && position[0][2] !== undefined) {
+    return position[0][2];
+  }
+  if (position[0][0] === position[1][1] && position[1][1] === position[2][2]
+    && position[0][0] !== undefined) {
+    return position[0][0];
+  }
+  if (position[2][0] === position[1][1] && position[1][1] === position[0][2]
+    && position[2][0] !== undefined) {
+    return position[2][0];
+  }
+  return undefined;
 }
 
 
